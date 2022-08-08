@@ -1,5 +1,5 @@
 export const handleIncrementDecrement = (counter, dispatch, id, state, type) => {
-    let counterState = [...state.state];
+    let counterState = state.state.slice();
     const index = counterState.findIndex((c) => c.id === id);
     if (type === "Increment") {
         counter.count += 1;
