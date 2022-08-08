@@ -1,4 +1,5 @@
 import React from "react";
+import { handleIncrementDecrement } from "../utils/common";
 import { useContextAPI } from "./Context/Context";
 
 export default function ChildCounter(props) {
@@ -6,30 +7,11 @@ export default function ChildCounter(props) {
 
   const counter = state.state.find((c) => c.id === props.id);
 
-  const handleIncrement = () => {
-    let counterState = [...state.state];
-    const index = counterState.findIndex((c) => c.id === props.id);
-    counter.count += 1;
+  const handleIncrement = () =>
+    handleIncrementDecrement(counter, dispatch, props.id, state, "Increment");
 
-    counterState.splice(index, 1, counter);
-
-    dispatch({
-      type: "UPDATE_COUNTER",
-      payload: counterState,
-    });
-  };
-
-  const handleDecrement = () => {
-    let counterState = [...state.state];
-    const index = counterState.findIndex((c) => c.id === props.id);
-    counter.count -= 1;
-    counterState.splice(index, 1, counter);
-
-    dispatch({
-      type: "UPDATE_COUNTER",
-      payload: counterState,
-    });
-  };
+  const handleDecrement = () =>
+    handleIncrementDecrement(counter, dispatch, props.id, state);
 
   return (
     <div className="p-4 h-auto flex flex-col items-center justify-center space-y-5 bg-white rounded shadow">
@@ -41,7 +23,10 @@ export default function ChildCounter(props) {
         >
           Increment
         </button>
-        <button onClick={handleDecrement} className="bg-red-400 text-white px-3 py-2 rounded shadow">
+        <button
+          onClick={handleDecrement}
+          className="bg-red-400 text-white px-3 py-2 rounded shadow"
+        >
           Decrement
         </button>
       </div>
