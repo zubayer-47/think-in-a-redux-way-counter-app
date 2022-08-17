@@ -1,11 +1,12 @@
 import React from "react";
-import Provider from "./components/Context/Context";
-import Counter from "./components/Counter";
+import { Provider } from "react-redux";
+import ShoppingCart from "./components/ShoppingCart";
+import store from "./redux/Store";
 
 export default function App() {
   return (
-    <Provider>
-      <Counter />
+    <Provider store={store}>
+      <ShoppingCart />
     </Provider>
   );
 }
