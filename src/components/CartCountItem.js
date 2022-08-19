@@ -1,6 +1,18 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { decrementCartItem, incrementCartItem } from "../redux/CartItem/Actions";
 
-export default function CartCountItem({title, amount}) {
+export default function CartCountItem({title, amount, cart}) {
+  const dispatch = useDispatch();
+
+  const increment = () => {
+    dispatch(incrementCartItem(cart.id))
+  }
+
+  const decrement = () => {
+    dispatch(decrementCartItem(cart.id))
+  }
+
   return (
     <div className="flex justify-between border-b-2 mb-2">
       <div className="text-lg py-2">
@@ -8,7 +20,7 @@ export default function CartCountItem({title, amount}) {
       </div>
       <div className="text-lg py-2">
         <div className="flex flex-row space-x-2 w-full items-center rounded-lg">
-          <button className="focus:outline-none bg-purple-700 hover:bg-purple-800 text-white font-bold py-1 px-1 rounded-full inline-flex items-center">
+          <button onClick={decrement} className="focus:outline-none bg-purple-700 hover:bg-purple-800 text-white font-bold py-1 px-1 rounded-full inline-flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4"
@@ -24,8 +36,8 @@ export default function CartCountItem({title, amount}) {
               />
             </svg>
           </button>
-          <p>{amount}</p>
-          <button className="focus:outline-none bg-purple-700 hover:bg-purple-800 text-white font-bold py-1 px-1 rounded-full inline-flex items-center">
+          <p>{cart.orderCount}</p>
+          <button onClick={increment} className="focus:outline-none bg-purple-700 hover:bg-purple-800 text-white font-bold py-1 px-1 rounded-full inline-flex items-center" disabled={!cart.orderCount}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4"
