@@ -17,16 +17,16 @@ export default function ShoppingCart() {
       <div className="grid grid-cols-12 gap-6">
         <div className="col-span-12 sm:col-span-12 md:col-span-7 lg:col-span-8 xxl:col-span-8">
           {state.carts.map((cart, index) => (
-            <div key={cart.id}>
-              {cart.totalCount !== 0 ? (
+//             <div key={cart.id}>
+//               {cart.totalCount !== 0 ? (
                 <CartItem
                 title={cart.title}
                 amount={cart.amount}
                 key={cart.id}
                 cart={cart}
               />
-              ) : null}
-            </div>
+//               ) : null}
+//             </div>
           ))}
         </div>
         <div className="col-span-12 sm:col-span-12 md:col-span-5 lg:col-span-4 xxl:col-span-4">
